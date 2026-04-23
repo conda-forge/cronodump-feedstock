@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/cronodump-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/cronodump-{{ version }}.tar.gz
   sha256: 084d6952e1604b2e2a0da9055a4cdca9e616db98a8f3f4781643aaccedc10ae8
 
 build:
@@ -15,14 +15,14 @@ build:
     - crodump=crodump.crodump:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - crodump --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/alephdata/cronodump/
